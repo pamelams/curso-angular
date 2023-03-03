@@ -1,0 +1,17 @@
+#divOdds {
+    margin: 0 2px;
+    border-radius: 5px;
+    width: 100px;
+    display: inline-block;
+    color: white;
+    background-color: rgb(45, 82, 201);
+}
+
+#divEvens {
+    margin: 0 2px;
+    border-radius: 5px;
+    width: 100px;
+    display: inline-block;
+    color: white;
+    background-color: rgb(243, 133, 8);
+}
