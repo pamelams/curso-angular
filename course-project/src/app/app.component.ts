@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'projeto-sessao3';
+  currentPage: string = '';
+
+  onPageSelected(page: string) {
+    this.currentPage = page;
+  }
 }
