@@ -8,7 +8,6 @@ import { UsersService } from '../users.service';
 })
 export class ActiveUsersComponent implements OnInit{
   @Input() users!: string[];
-  @Output() userSetToInactive = new EventEmitter<number>();
 
   constructor(private usersService: UsersService) {}
 
