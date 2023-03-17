@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { RecipesService } from 'src/app/shared/services/recipes.service';
 import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
 import { Recipe } from '../recipe.model';
 
@@ -10,13 +11,10 @@ import { Recipe } from '../recipe.model';
 export class RecipeDetailComponent {
   @Input() recipe!: Recipe;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private recipesService: RecipesService) {}
 
-  onAddIngToShoppList() {
-    for(let ingredient of this.recipe.ingredients) {
-      this.shoppingListService.addIngredient(ingredient.name, ingredient.amount);
-    }
-
+  onAddToShoppingList() {
+    this.recipesService.addtoShoppingList(this.recipe.ingredients);
   }
 
 }
