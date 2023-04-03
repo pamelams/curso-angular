@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'projeto-sessao3';
+  title = 'Recipe Book';
   currentPage: string = '';
 
   onPageSelected(page: string) {
