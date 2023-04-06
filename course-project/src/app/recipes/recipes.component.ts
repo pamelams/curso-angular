@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../shared/services/recipes.service';
 import { Recipe } from './recipe.model';
 
@@ -9,8 +10,10 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesComponent implements OnInit {
   recipeSelected!: Recipe;
+  isRecipeSelected: boolean = false;
 
-  constructor(private recipesService: RecipesService) {}
+  constructor(private recipesService: RecipesService,
+    private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.recipesService.recipeItemSelected.subscribe(
