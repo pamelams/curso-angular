@@ -10,7 +10,6 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesComponent implements OnInit {
   recipeSelected!: Recipe;
-  isRecipeSelected: boolean = false;
 
   constructor(private recipesService: RecipesService,
     private router: Router, private route: ActivatedRoute) {}

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from 'src/app/shared/services/recipes.service';
 import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
@@ -16,7 +16,7 @@ export class RecipeDetailComponent implements OnInit{
     private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.recipe = this.recipesService.getRecipe(+this.route.snapshot.params['id']);
+    //this.recipe = this.recipesService.getRecipe(+this.route.snapshot.params['id']);
     this.route.params.subscribe(
       (params: Params) => {
         this.recipe = this.recipesService.getRecipe(+params['id']);
