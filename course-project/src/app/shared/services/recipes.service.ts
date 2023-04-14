@@ -1,11 +1,10 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Recipe } from "src/app/recipes/recipe.model";
 import { Ingredient } from "../ingredient.model";
 import { ShoppingListService } from "./shopping-list.service";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
-    recipeItemSelected = new EventEmitter<Recipe>();
     private recipes: Recipe[] = [
         new Recipe('Crepioca', 
         "Crepioca is made from a batter with egg and tapioca flour. It is more filling than the tapioca crepe, made just with water, so you don’t need any topping, but if you wish, you can add your favourite sweet or savoury filling.", 
