@@ -1,0 +1,12 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+span {
+    font-size: small;
+    color: rgb(71, 69, 69);
+}
+
+label {
+    font-weight:450;
+}

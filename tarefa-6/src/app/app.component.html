@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <br>
+      <form (ngSubmit)="onSubmit()" #f="ngForm"> 
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input type="email" 
+          id="email" 
+          class="form-control"
+          ngModel
+          name="email"
+          required
+          email
+          #email="ngModel">
+          <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" 
+          id="password" 
+          class="form-control"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+          #password="ngModel">
+          <span class="help-block" *ngIf="!password.valid && password.touched">The password must have at least 6 characters!</span>
+        </div>
+        <div class="form-group">
+          <label for="subscription">Subscription</label>
+          <select id="subscription" 
+          class="form-control"
+          [ngModel]="defaultSubscription"
+          name="subscription"
+          required>
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+        <br>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="!f.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <!-- <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h3>Your Data</h3>
+      <p>Username: {{ user.username }} </p>
+      <p>Mail: {{ user.email }}</p>
+      <p>Secret Question: {{ user.secretQuestion }}</p>
+      <p>Answer: {{ user.answer }}</p>
+      <p>Gender: {{ user.gender }}</p>
+    </div>
+  </div> -->
+</div>
