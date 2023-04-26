@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
         'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]), // bind(this) passa o this atual para a função
         'email': new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails),
       }),
-      'gender': new FormControl('male'),
+      'gender': new FormControl('male', {nonNullable: true}),
       'hobbies': new FormArray([]),
     });
     // this.signupForm.valueChanges.subscribe(
@@ -31,10 +31,24 @@ export class AppComponent implements OnInit {
     //     console.log(status);
     //   }
     // );
+    this.signupForm.setValue({ // atualiza o formulário inteiro
+      'userData': {
+        'username': 'Pamela',
+        'email': 'pamela@test.com'
+      },
+      'gender': 'female',
+      'hobbies': []
+    });
+    this.signupForm.patchValue({  // atualiza apenas alguns valores do formulário
+      'userData': {
+        'username': 'Anna',
+      },
+    });
   }
 
   onSubmit() {
     console.log(this.signupForm.value);
+    this.signupForm.reset();
   }
 
   getControls() {
