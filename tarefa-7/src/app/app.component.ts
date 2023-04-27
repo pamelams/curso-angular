@@ -9,13 +9,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'tarefa-7';
   signupForm!: FormGroup;
-  status = ['stable', 'critical', 'finished'];
+  status = ['Stable', 'Critical', 'Finished'];
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       'projectData': new FormGroup({
         'projectName': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
-        'projectStatus': new FormControl('stable', {nonNullable: true}),
+        'projectStatus': new FormControl('Stable', {nonNullable: true}),
       }),
       'email': new FormControl(null, [Validators.required, Validators.email]),
     });

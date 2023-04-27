@@ -16,14 +16,14 @@
                 <span *ngIf="signupForm.get('projectData.projectName')!.errors!['required']">This field is required!</span>
               </span>
           </div>
-          <p>Project Status</p>
-          <div class="radio" *ngFor="let s of status">
-            <label>
-              <input 
-                type="radio"
-                formControlName="projectStatus"
-                [value]="s"> {{ s }}
-            </label>
+          <div class="form-group">
+            <label for="projectStatus">Project Status</label>
+          <select name="projectStatus" 
+            id="projectStatus"
+            class="form-control"
+            formControlName="projectStatus">
+            <option *ngFor="let s of status" [value]=s> {{ s }} </option>
+          </select>
           </div>
         </div>
         <div class="form-group">
