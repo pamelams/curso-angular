@@ -9,6 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class RecipeEditComponent implements OnInit {
   id !: number;
   editMode = false;
+  description!: string;
 
   constructor(private route: ActivatedRoute) { }
 
@@ -22,4 +23,7 @@ export class RecipeEditComponent implements OnInit {
     )
   }
 
+  onSubmit() {
+
+  }
 }
