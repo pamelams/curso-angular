@@ -61,6 +61,11 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
+        <button class="btn btn-primary" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
         <button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid">Save</button>
         <button class="btn btn-danger" type="button">Cancel</button>
       </div>
