@@ -40,6 +40,11 @@ export class RecipesService {
         this.recipesChanged.next();
       }
 
+      deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+        this.recipesChanged.next();
+      }
+
       addtoShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
       }
