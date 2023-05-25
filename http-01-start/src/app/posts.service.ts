@@ -10,12 +10,10 @@ export class PostsService {
     
     createAndStorePost(title: string, content: string) {
         const postData: Post = {title: title, content: content};
-        this.http.post<{name: string}>(
+        return this.http.post<{name: string}>(
             'https://http-01-backend-default-rtdb.firebaseio.com/posts.json', 
             postData
-            ).subscribe(responseData => {
-              console.log(responseData);
-          });
+            );
     }
 
     fetchPosts() {

@@ -24,7 +24,11 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
-    this.postsService.createAndStorePost(postData.title, postData.content);    
+    this.postsService.createAndStorePost(postData.title, postData.content).
+    subscribe(responseData => {
+      console.log(responseData);
+      this.onFetchPosts();
+  });    
   }
 
   onFetchPosts() {
