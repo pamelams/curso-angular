@@ -18,10 +18,14 @@ export class PostsService {
     }
 
     fetchPosts() {
+      let searchParams = new HttpParams();
+      searchParams = searchParams.append('print', 'pretty');
+      searchParams = searchParams.append('custom', 'key');
         return this.http.get<{[key: string]: Post}>(
-            'https://http-01-backend-default-rtdb.firebaseio.com/posts.json', 
-            { headers: new HttpHeaders({'Custom-Header': 'Hello'}),
-              params: new HttpParams().set('print', 'pretty') }
+            'https://http-01-backend-default-rtdb.firebaseio.com/posts.json', { 
+              headers: new HttpHeaders({'Custom-Header': 'Hello'}),
+              params: searchParams
+            }
             ).pipe(map((responseData) => {
               const postsArray: Post[] = [];
               for(const key in responseData) {
