@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams, HttpEventType } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Post } from "./post.model";
-import { map, catchError } from "rxjs/operators";
+import { map, catchError, tap } from "rxjs/operators";
 import { throwError } from "rxjs";
 
 @Injectable({providedIn: 'root'})
@@ -13,8 +13,10 @@ export class PostsService {
         const postData: Post = {title: title, content: content};
         return this.http.post<{name: string}>(
             'https://http-01-backend-default-rtdb.firebaseio.com/posts.json', 
-            postData
-            );
+            postData, {
+              observe: 'response'
+            }
+          );
     }
 
     fetchPosts() {
@@ -40,6 +42,16 @@ export class PostsService {
     }
 
     clearPosts() {
-        return this.http.delete('https://http-01-backend-default-rtdb.firebaseio.com/posts.json');
+        return this.http.delete('https://http-01-backend-default-rtdb.firebaseio.com/posts.json', {
+          observe: 'events'
+        }).pipe(tap(event => {
+          console.log(event);
+          if(event.type === HttpEventType.Sent) {
+            // ...
+          }
+          if(event.type === HttpEventType.Response) {
+            console.log(event.body)
+          }
+        }));
     }
 }
