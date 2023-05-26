@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
     subscribe(responseData => {
       console.log(responseData);
       this.onFetchPosts();
+  }, error => {
+    this.error = 'Error ' + error.status + ' ' + error.statusText;
   });    
   }
 
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
       this.loadedPosts = posts;
     }, error => {
       this.error = 'Error ' + error.status + ' ' + error.statusText;
+      this.isFetching = false;
     });
   }
 
@@ -42,5 +45,11 @@ export class AppComponent implements OnInit {
     this.postsService.clearPosts().subscribe(() => {
       this.loadedPosts = [];
     });
+  }
+
+  onHandleError() {
+    console.log(this.error, !!this.error);
+    this.error = null;
+    console.log(this.error, !!this.error);
   }
 }
