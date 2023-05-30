@@ -54,4 +54,11 @@ export class RecipesService {
         this.http.put('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json', this.recipes).subscribe(response => console.log(response));        
       }
 
+      fetchRecipes() {
+        this.http.get<Recipe[]>('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json').subscribe(recipes => {
+          this.recipes = recipes;
+          console.log(recipes);
+          this.recipesChanged.next();
+        });
+      }
 }
