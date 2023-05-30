@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { Recipe } from "src/app/recipes/recipe.model";
 import { Ingredient } from "../ingredient.model";
 import { ShoppingListService } from "./shopping-list.service";
-import { Subject } from "rxjs";
+import { Subject, map } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
@@ -20,7 +21,7 @@ export class RecipesService {
       ];
       recipesChanged = new Subject<void>();
 
-      constructor(private shoppingListService: ShoppingListService) {}
+      constructor(private shoppingListService: ShoppingListService, private http: HttpClient) {}
 
       getRecipes() {
         return this.recipes.slice();
@@ -48,4 +49,9 @@ export class RecipesService {
       addtoShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
       }
+
+      saveRecipes() {
+        this.http.put('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json', this.recipes).subscribe(response => console.log(response));        
+      }
+
 }
