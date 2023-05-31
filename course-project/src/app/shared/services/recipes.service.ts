@@ -63,7 +63,12 @@ export class RecipesService {
       }
 
       fetchRecipes() {
-        this.http.get<Recipe[]>('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json').subscribe(recipes => {
+        this.http.get<Recipe[]>('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json').
+        pipe(map(recipes => {
+          return recipes.map(recipe => {
+            return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients: [] as Ingredient[] };
+          });
+        })).subscribe(recipes => {
           this.recipes = recipes;
           this.recipesChanged.next();
         });
