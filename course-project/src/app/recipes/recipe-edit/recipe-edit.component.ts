@@ -4,17 +4,21 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { RecipesService } from 'src/app/shared/services/recipes.service';
 import { Recipe } from '../recipe.model';
-
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactive-guard.service';
+import { Observable } from 'rxjs';
+import { cloneDeep } from 'lodash'; 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   id !: number;
   editMode = false;
+  changesSaved = false;
   description!: string;
   recipeForm!: FormGroup;
+  initialRecipeForm!: FormGroup;
   ingredients: {name: string, amount: number}[] = [];
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService,
@@ -28,8 +32,6 @@ export class RecipeEditComponent implements OnInit {
         this.initForm();
       }
     );
-    
-    
   }
 
   private initForm() {
@@ -50,7 +52,7 @@ export class RecipeEditComponent implements OnInit {
       'description': new FormControl((this.editMode ? this.recipeService.getRecipe(this.id).description : null), Validators.required),
       'ingredients': recipeIngredients,
     });
-
+    this.initialRecipeForm = cloneDeep(this.recipeForm);
   }
 
   onSubmit() {
@@ -60,6 +62,7 @@ export class RecipeEditComponent implements OnInit {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
     const index = this.recipeService.getRecipes().length - 1;
+    this.changesSaved = true;
     this.router.navigate(['recipes', index], { relativeTo: null }); 
   }
 
@@ -68,7 +71,6 @@ export class RecipeEditComponent implements OnInit {
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
     }));
-
   }
 
   onDeleteIngredient(index: number) {
@@ -79,7 +81,18 @@ export class RecipeEditComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if(this.changesSaved || this.recipeForm.pristine) {
+      return true;
+    }
+    else {
+      return confirm('Do you want to discard the changes?');
+    }
+  }
+
   get controls() { // a getter!
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 }
+
+

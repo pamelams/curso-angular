@@ -7,13 +7,14 @@ import { RecipesComponent } from "./recipes/recipes.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
+import { CanDeactivateGuard } from "./shared/guards/can-deactive-guard.service";
 
 const appRoutes: Routes = [
     { path: '' , redirectTo: '/recipes', pathMatch: 'full' },
     { path: 'recipes' , component: RecipesComponent, children: [
         { path: '', component: RecipeStartComponent },
-        { path: 'new', component: RecipeEditComponent },
-        { path: ':id/edit', component: RecipeEditComponent },
+        { path: 'new', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard] },
+        { path: ':id/edit', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard] },
         { path: ':id', component: RecipeDetailComponent },
     ] },
     { path: 'shopping-list' , component: ShoppingListComponent },
