@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { Recipe } from "src/app/recipes/recipe.model";
 import { Ingredient } from "../ingredient.model";
 import { ShoppingListService } from "./shopping-list.service";
-import { Subject, map } from "rxjs";
+import { Subject, map, take } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
-    private recipes: Recipe[] = [
+    private recipes: Recipe[] = [];
+    private defaultRecipes: Recipe[] = [
         new Recipe('Crepioca', 
         "Crepioca is made from a batter with egg and tapioca flour. It is more filling than the tapioca crepe, made just with water, so you don’t need any topping, but if you wish, you can add your favourite sweet or savoury filling.", 
         'https://www.emporiumpax.com.br/wp-content/uploads/2022/03/receita-de-receita-de-crepioca-simples-com-apenas-3-ingredientes.webp',
@@ -21,10 +22,15 @@ export class RecipesService {
       ];
       recipesChanged = new Subject<void>();
 
-      constructor(private shoppingListService: ShoppingListService, private http: HttpClient) {}
+      constructor(private shoppingListService: ShoppingListService, private http: HttpClient) { }
+
+      initializeDefaultRecipes() {
+        this.saveRecipes(this.defaultRecipes);
+        this.recipesChanged.pipe(take(1)).subscribe(() => this.fetchRecipes());
+      }
 
       getRecipes() {
-        return this.recipes.slice();
+        return this.recipes ? this.recipes.slice() : [];
       }
 
       getRecipe(index: number): Recipe {
@@ -50,14 +56,15 @@ export class RecipesService {
         this.shoppingListService.addIngredients(ingredients);
       }
 
-      saveRecipes() {
-        this.http.put('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json', this.recipes).subscribe(response => console.log(response));        
+      saveRecipes(recipes: Recipe[] = this.recipes) {
+        this.http.put('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json', recipes).subscribe(response => {
+          this.recipesChanged.next(); 
+        });       
       }
 
       fetchRecipes() {
         this.http.get<Recipe[]>('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json').subscribe(recipes => {
           this.recipes = recipes;
-          console.log(recipes);
           this.recipesChanged.next();
         });
       }
