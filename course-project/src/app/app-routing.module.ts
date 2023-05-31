@@ -8,14 +8,15 @@ import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.compon
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { CanDeactivateGuard } from "./shared/guards/can-deactive-guard.service";
+import { RecipesResolverService } from "./shared/services/recipes-resolver.service";
 
 const appRoutes: Routes = [
     { path: '' , redirectTo: '/recipes', pathMatch: 'full' },
     { path: 'recipes' , component: RecipesComponent, children: [
-        { path: '', component: RecipeStartComponent },
+        { path: '', component: RecipeStartComponent, resolve: [RecipesResolverService] },
         { path: 'new', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard] },
-        { path: ':id/edit', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard] },
-        { path: ':id', component: RecipeDetailComponent },
+        { path: ':id/edit', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard], resolve: [RecipesResolverService] },
+        { path: ':id', component: RecipeDetailComponent, resolve: [RecipesResolverService] },
     ] },
     { path: 'shopping-list' , component: ShoppingListComponent },
 ]
