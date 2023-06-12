@@ -70,6 +70,7 @@ export class RecipesService {
             return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients: [] as Ingredient[] };
           });
         }), tap(recipes => {
+          console.log('receitas:', recipes);
           this.recipes = recipes;
           this.recipesChanged.next();
         }));
