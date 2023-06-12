@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, throwError } from "rxjs";
-import { User } from "./user.model";
+import { User } from "../../auth/user.model";
 
 export interface AuthResponseData {
     idToken: string;
@@ -40,14 +40,12 @@ export class AuthService {
                 password: password,
                 returnSecureToken: true
             }).pipe(catchError(this.handleError), tap(resData => {
-                console.log('login');
                 this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
             })
         );
     }
 
     private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
-        console.log('handle auth');
         const expirationDate = new Date(new Date().getTime() + (expiresIn * 1000));
         const user = new User(email, userId, token, expirationDate);
         console.log(user);
@@ -55,7 +53,6 @@ export class AuthService {
     }
 
     private handleError(errorRes: HttpErrorResponse) {
-        console.log('handle error');
         let errorMessage = 'An unknown error occurred';
         if(!errorRes.error || !errorRes.error.error) {
             return throwError(errorMessage);

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { AuthResponseData, AuthService } from "./auth.service";
+import { AuthResponseData, AuthService } from "../shared/services/auth.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 
@@ -40,11 +40,9 @@ export class AuthComponent {
 
         authObs.subscribe(respData => {
             console.log(respData);
-            console.log('sucesso');
             this.isLoading = false;
             this.router.navigate(['recipes'], { relativeTo: null });
         }, errorMessage => {
-            console.log('nao autenticou');
             console.log(errorMessage);
             this.error = errorMessage;
             this.isLoading = false;

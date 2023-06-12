@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RecipesService } from '../shared/services/recipes.service';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,10 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onFetchData() {
         this.recipesService.fetchRecipes().subscribe((resData) => {
-            console.log('deu certo');
             console.log(resData);
         }, (error) => {
-            console.log('deu certo nao');
             console.log(error);
         });
     }

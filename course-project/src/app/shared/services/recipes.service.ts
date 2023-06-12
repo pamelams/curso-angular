@@ -5,7 +5,7 @@ import { ShoppingListService } from "./shopping-list.service";
 import { Subject, map, take } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { exhaustMap, tap } from "rxjs/operators";
-import { AuthService } from "src/app/auth/auth.service";
+import { AuthService } from "src/app/shared/services/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
