@@ -65,21 +65,16 @@ export class RecipesService {
       }
 
       fetchRecipes() {
-        return this.authService.user.pipe(take(1), exhaustMap(user => {
-          return this.http.get<Recipe[]>(
-            'https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json',
-            {
-              params: new HttpParams().set('auth', user ? user.token : '')
-            }
-          );
-        }), map(recipes => {
-          return recipes.map(recipe => {
-            return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients: [] as Ingredient[] };
-          });
-        }), tap(recipes => {
-          console.log('receitas:', recipes);
-          this.recipes = recipes;
-          this.recipesChanged.next();
-        }));
+        return this.http.get<Recipe[]>(
+            'https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json'
+          ).pipe(map(recipes => {
+            return recipes.map(recipe => {
+              return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients: [] as Ingredient[] };
+            });
+          }), tap(recipes => {
+            console.log('receitas:', recipes);
+            this.recipes = recipes;
+            this.recipesChanged.next();
+          }));
       }
 }
