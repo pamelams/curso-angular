@@ -10,10 +10,11 @@ import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component
 import { CanDeactivateGuard } from "./shared/guards/can-deactive-guard.service";
 import { RecipesResolverService } from "./shared/services/recipes-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./shared/guards/auth.guard";
 
 const appRoutes: Routes = [
     { path: '' , redirectTo: '/recipes', pathMatch: 'full' },
-    { path: 'recipes' , component: RecipesComponent, children: [
+    { path: 'recipes' , component: RecipesComponent, canActivate: [AuthGuard], children: [
         { path: '', component: RecipeStartComponent, resolve: [RecipesResolverService] },
         { path: 'new', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard] },
         { path: ':id/edit', component: RecipeEditComponent, canDeactivate: [CanDeactivateGuard], resolve: [RecipesResolverService] },
