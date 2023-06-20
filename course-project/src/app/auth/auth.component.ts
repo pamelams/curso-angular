@@ -67,16 +67,13 @@ export class AuthComponent implements OnDestroy {
     }
 
     private showErrorAlert(errorMessage: string) {
-        const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
-
         const hostViewContainerRef = this.alertHost.viewContainerRef;
         hostViewContainerRef.clear();
-        const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+        const componentRef = hostViewContainerRef.createComponent(AlertComponent);
         componentRef.instance.message = errorMessage;
         this.closeSub = componentRef.instance.close.subscribe(() => {
             this.closeSub.unsubscribe();
             hostViewContainerRef.clear();
         });
-
     }
 }
