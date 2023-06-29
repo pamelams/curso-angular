@@ -1,7 +1,7 @@
-import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from "@angular/core";
+import { Component, OnDestroy, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { AuthResponseData, AuthService } from "../shared/services/auth.service";
-import { Observable, Subscription, zipAll } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { AlertComponent } from "../shared/alert/alert.component";
 import { PlaceholderDirective } from "../shared/directives/placeholder.directive";
@@ -18,8 +18,7 @@ export class AuthComponent implements OnDestroy {
     @ViewChild(PlaceholderDirective) alertHost!: PlaceholderDirective;
     private closeSub: Subscription = new Subscription();
 
-    constructor(private authService: AuthService, private router: Router, 
-        private componentFactoryResolver: ComponentFactoryResolver) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     ngOnDestroy(): void {
         if(this.closeSub) {
@@ -49,11 +48,9 @@ export class AuthComponent implements OnDestroy {
         }  
 
         authObs.subscribe(respData => {
-            console.log(respData);
             this.isLoading = false;
             this.router.navigate(['recipes'], { relativeTo: null });
         }, errorMessage => {
-            console.log(errorMessage);
             this.error = errorMessage;
             this.showErrorAlert(errorMessage);
             this.isLoading = false;

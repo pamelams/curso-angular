@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from 'src/app/shared/services/recipes.service';
-import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
 import { Recipe } from '../recipe.model';
 
 @Component({

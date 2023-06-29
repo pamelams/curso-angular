@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onFetchData() {
         this.recipesService.fetchRecipes().subscribe((resData) => {
-            console.log(resData);
         }, (error) => {
             console.log(error);
         });

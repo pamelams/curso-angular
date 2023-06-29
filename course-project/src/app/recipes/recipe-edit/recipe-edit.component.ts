@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Ingredient } from 'src/app/shared/ingredient.model';
 import { RecipesService } from 'src/app/shared/services/recipes.service';
-import { Recipe } from '../recipe.model';
 import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactive-guard.service';
 import { Observable } from 'rxjs';
 import { cloneDeep } from 'lodash'; 

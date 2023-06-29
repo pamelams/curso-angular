@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
 import { Subscription } from 'rxjs';
