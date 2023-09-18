@@ -7,7 +7,7 @@ import { tap } from "rxjs/operators";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { Store } from "@ngrx/store";
 import { addIngredients } from "src/app/shopping-list/store/shopping-list.actions";
-import { AppState } from "src/app/shopping-list/store/shopping-list.reducer";
+import { AppState } from "src/app/store/app.reducer";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
@@ -59,12 +59,10 @@ export class RecipesService {
 
       addtoShoppingList(ingredients: Ingredient[]) {
         this.store.dispatch(addIngredients({ingredients: ingredients}));
-        //this.shoppingListService.addIngredients(ingredients);
       }
 
       saveRecipes(recipes: Recipe[] = this.recipes) {
         this.http.put('https://recipe-book-5500d-default-rtdb.firebaseio.com/recipes.json', recipes).subscribe(response => {
-          //this.recipesChanged.next(); 
         });       
       }
 

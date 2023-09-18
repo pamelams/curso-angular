@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from './store/shopping-list.reducer';
+import { AppState } from '../store/app.reducer';
 import { startEdit } from './store/shopping-list.actions';
 
 @Component({
@@ -22,17 +22,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ingredients$ = this.store.select('shoppingList');
-    // this.ingredients = this.shoppingListService.getIngredients();
-    // this.subscription = this.shoppingListService.ingredientsChanged.subscribe(
-    //   () => {
-    //     this.ingredients = this.shoppingListService.getIngredients();
-    //   }
-    // );
   }
 
   onEditItem(index: number) {
     this.store.dispatch(startEdit({index: index}));
-    //this.shoppingListService.startedEditing.next(index);
   }
 
 }
