@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { AuthResponseData, AuthService } from "../shared/services/auth.service";
-import { Observable, Subscription } from "rxjs";
-import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { AlertComponent } from "../shared/alert/alert.component";
 import { PlaceholderDirective } from "../shared/directives/placeholder.directive";
 import { Store } from "@ngrx/store";
@@ -23,8 +21,7 @@ export class AuthComponent implements OnDestroy, OnInit {
     private closeSub: Subscription = new Subscription();
     private storeSub: Subscription = new Subscription();
 
-    constructor(private authService: AuthService, private router: Router,
-        private store: Store<AppState>) {}
+    constructor(private store: Store<AppState>) {}
     
     ngOnInit(): void {
         this.storeSub = this.store.select('auth').subscribe(authState => {
