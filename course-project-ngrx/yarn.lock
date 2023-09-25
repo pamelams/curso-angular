@@ -147,7 +147,7 @@
     "symbol-observable" "4.0.0"
     "yargs" "17.6.2"
 
-"@angular/common@^15.1.0", "@angular/common@15.1.5":
+"@angular/common@^15.0.0", "@angular/common@^15.1.0", "@angular/common@15.1.5":
   "integrity" "sha512-52Ut/IeoM3avzV3Ts/ISkq7cc1FlA6dhLUq+L3ebY+Z8zZskCWjJWu4UgLGyVdtgSuAItyQm9CoZd+DrPLYtDA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-15.1.5.tgz"
   "version" "15.1.5"
@@ -205,7 +205,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/router@^15.1.0":
+"@angular/router@^15.0.0", "@angular/router@^15.1.0":
   "integrity" "sha512-1NXyXySE2/8aVjHk2e977b2uEDpKe3QIRSndpQXEmlqkQDPYKz8wwo4vyLlL5XK3k7pVKpcqDStvVyddD6YUvQ=="
   "resolved" "https://registry.npmjs.org/@angular/router/-/router-15.1.5.tgz"
   "version" "15.1.5"
@@ -1248,23 +1248,30 @@
   "version" "2.0.4"
 
 "@ngrx/effects@^15.1.0":
-  "integrity" "sha512-/8gHhOM9aeGaw8OG2LLwi4I4p84xzG0EU9TqWrvQcW74wn8sFZONjLvUte5YOzJ5502PPFFrfXSOc+lHnVAJUA=="
-  "resolved" "https://registry.npmjs.org/@ngrx/effects/-/effects-15.4.0.tgz"
-  "version" "15.4.0"
+  "integrity" "sha512-/8YnhzyAOTdI9RYJAqmIIvh8ip4M4x4DrRyrdDDc62oFM3TrVOvknUUpMp5NxKpKph8hSpevAwaeEBDWGnKkjg=="
+  "resolved" "https://registry.npmjs.org/@ngrx/effects/-/effects-15.1.0.tgz"
+  "version" "15.1.0"
   dependencies:
     "tslib" "^2.0.0"
 
-"@ngrx/store-devtools@^15.4.0":
-  "integrity" "sha512-AqWRprSyS3u/vZlpsBOPMW1/0TZS2LE13/KpZedEY+RMCW+mi53esqgrdNGOB3Wr4vrI82Ar9fgaIm4TQO6LPg=="
-  "resolved" "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-15.4.0.tgz"
-  "version" "15.4.0"
+"@ngrx/router-store@^15.1.0":
+  "integrity" "sha512-XvRBGRRynJfhcNBDLPqo42srwgxJ5+FNslPYjGdo4vU5PVA6YplR0AN1kihHYkVWJSq0IJZ85vxtK9JdyHQg/Q=="
+  "resolved" "https://registry.npmjs.org/@ngrx/router-store/-/router-store-15.1.0.tgz"
+  "version" "15.1.0"
   dependencies:
     "tslib" "^2.0.0"
 
-"@ngrx/store@15.4.0":
-  "integrity" "sha512-OvCuNBHL8mAUnRTS6QSFm+IunspsYNu2cCwDovBNn7EGhxRuGihBeNoX47jCqWPHBFtokj4BlatDfpJ/yCh4xQ=="
-  "resolved" "https://registry.npmjs.org/@ngrx/store/-/store-15.4.0.tgz"
-  "version" "15.4.0"
+"@ngrx/store-devtools@^15.1.0":
+  "integrity" "sha512-InEFdjg2cE0nLgdWWcjXa50SFlzxSVOoeudRqkqQlJlpJ/0RPljlRXHXT63E5cUpryTxYdK2QcE4n5vngq/48g=="
+  "resolved" "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-15.1.0.tgz"
+  "version" "15.1.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
+"@ngrx/store@15.1.0":
+  "integrity" "sha512-Wxjme7yJnxD6il6fGZdFTdSs9gL+6OFW8/II9vApFokUb0E7UQBm8RYb9dYJ2IQJvWXwO+2ItSaecRUZgt39kA=="
+  "resolved" "https://registry.npmjs.org/@ngrx/store/-/store-15.1.0.tgz"
+  "version" "15.1.0"
   dependencies:
     "tslib" "^2.0.0"
 

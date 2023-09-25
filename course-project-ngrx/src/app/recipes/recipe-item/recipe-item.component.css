@@ -4,3 +4,8 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
 }
+
+img {
+    height: 50px;
+    width: 80px;
+}
