@@ -12,12 +12,14 @@ import { startEdit } from './store/shopping-list.actions';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients$!: Observable<{ingredients: Ingredient[]}>;
-  private subscription!: Subscription;
+  private subscription?: Subscription;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
